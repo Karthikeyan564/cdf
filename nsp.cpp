@@ -1,18 +1,45 @@
 #include<string>
 #include<stdlib.h>
 #include<iostream>
-int main(int argn,char **arg){	std::string ar= arg[1];
-	std::string op[10];
-	std::string intap[50];
-	int r,j,e;
-	for(r=1,j=0,e=0;r<argn;r++){
-		if(arg[r][0]=='-') {op[j]=arg[r];j++;}
-		else {intap[e]=arg[r];e++;}
+struct node{
+	std::string info;
+	node *next;
+};
+template <class T,class M> class stack{
+    public:
+    	void push(T* &top,M ele){
+    		T* temp;
+    		temp = new T;
+    		temp->info = ele;
+    		temp->next = top;
+    		top = temp;
+    	}
+    	M pop(T* &top){
+    		T* temp;
+    		temp = top;
+    		M con=top->info;
+    		top = top->next;
+    		free(temp);
+    		return con;
+    	}
+};
+int main(int argn,char **arg){
+	node* top1 = nullptr , * top2= nullptr;
+	stack<node,std::string> op;
+	stack<node,std::string> intap;
+	int r;
+	std::string tem;
+	std::string ar = arg[1];
+	for(r=2;r<argn;r++){
+        tem = arg[r];
+		if(arg[r][0]=='-') op.push(top1,tem);
+		else intap.push(top2,tem);
 	}
 	std::string a,c="g++ -o ../exec/"+ar+" ../bin/"+ar+".cpp";
-	for(j--;j>=0;j--){
-	c+=" "+op[j];
+	while ( top1!=nullptr ){
+	    a=op.pop(top1)+" "+a;
 	}
+	c+=" "+a;
 	std::cout<<"\n**************************************************************\n";
 	int re = system(c.c_str());
 	if ( re == 0 ){
@@ -22,11 +49,13 @@ int main(int argn,char **arg){	std::string ar= arg[1];
 		std::cout<<"**************************************************************\n\n^\n";
 		std::cout.flush();
 	    c = "./../exec/"+ar;
-	    for(int i=1;i<e;i++){
-	        c += " "+intap[i];
+	    while ( top2!=nullptr ){
+	        a =intap.pop(top2)+" "+a;
 	    }
+	    c+=" "+a;
 		system(c.c_str());
 	}
 	else
 		exit(0);
+	return 0;
 }
