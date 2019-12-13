@@ -13,6 +13,7 @@ int main(int argn,char **arg){	std::string ar= arg[1];
 	for(j--;j>=0;j--){
 	c+=" "+op[j];
 	}
+	std::cout<<"\n**************************************************************\n";
 	int re = system(c.c_str());
 	if ( re == 0 ){
 	 // c = "notify-send \"Build done\" \""+ar+" Build successful\"";      -previous implementation
