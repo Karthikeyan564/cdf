@@ -28,11 +28,19 @@ int main(int argn,char **arg){
 	stack<node,std::string> op;
 	stack<node,std::string> intap;
 	int r;
+	bool e=false;
 	std::string tem;
 	std::string ar = arg[1];
 	for(r=2;r<argn;r++){
         tem = arg[r];
-		if(arg[r][0]=='-') op.push(top1,tem);
+		if(arg[r][0]=='-'){ 
+			if(arg[r][1]=='z'){
+				system("python3 create.py");
+				e=true;
+			}
+			else
+			op.push(top1,tem);
+		}
 		else intap.push(top2,tem);
 	}
 	std::string a,c="g++ -o ../exec/"+ar+" ../bin/"+ar+".cpp";
@@ -53,7 +61,9 @@ int main(int argn,char **arg){
 	        a =intap.pop(top2)+" "+a;
 	    }
 	    c+=" "+a;
+	    if(e==true) c+="<../.tem/temp.txt";
 		system(c.c_str());
+		if(e==true) system("rm ../.tem/temp.txt");
 	}
 	else
 		exit(0);
