@@ -49,7 +49,7 @@ int main(int argn,char **arg){
 				system("python3 create.py");
 				e[0]=true;
 			}
-			if(arg[r][1]=='t'){
+			else if(arg[r][1]=='t'){
 				e[1]=true;
 			}
 			else
