@@ -57,7 +57,7 @@ int main(int argn,char **arg){
 		}
 		else intap.push(top2,tem);
 	}
-	std::string a,c="g++ -o ../exec/"+ar+" ../bin/"+ar+".cpp";
+	std::string a,c="g++ -o ~/cdf/bin/"+ar+" ..~/cdf/src/"+ar+".cpp";
 	while ( top1!=nullptr ){
 	    a=op.pop(top1)+" "+a;
 	}
